@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ryan Bougan - Portfolio</title>
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li><a href="#introduction">Introduction</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  
+  <header>
+    <h1>Ryan Bougan</h1>
+    <p>Portoflio of a Software Engineer</p>
+  </header>
+
+  <main>
+    <section id="introduction">
+        <h2>Welcome to My Website</h2>
+        <p>Hello, my name is Ryan Bougan. I am an aspiring software engineer, but my career to this point has mostly involved tehcnical, UX, and proposal writing. This portofolio site serves as a demonstration of my engineering acumen--particularly with HMTL, CSS, and Javascript.</p>
+      </section>
+
+    <section id="projects">
+    <section class="project">
+      <h2>Project 1</h2>
+      <p>This project takes an English word and translates it into Pig Latin. The project uses if and while loops to check if the entered text begins with vowel; if it does, it uses the .slice() method to create the translation. If the word starts with a consonant, it simply appends "ay" to the end of the string.</p>
+      
+      <div class="translator-container">
+      <h4>Pig Latin Translator</h4>
+      <input type="text" id="word" placeholder="Enter an English word">
+      <button id="translateBtn">Translate</button>
+      <p id="translation"></p>
+    
+      <script>
+        document.getElementById('translateBtn').addEventListener('click', function () {
+          var wordInput = document.getElementById('word');
+          var translationOutput = document.getElementById('translation');
+    
+          var word = wordInput.value.toLowerCase().trim();
+          var pigLatin = translateToPigLatin(word);
+    
+          translationOutput.textContent = pigLatin;
+        });
+    
+        function translateToPigLatin(word) {
+          var vowels = ['a', 'e', 'i', 'o', 'u'];
+          var pigLatin = '';
+    
+          if (vowels.includes(word[0])) {
+            pigLatin = word + 'ay';
+          } else {
+            var consonantCluster = '';
+            var i = 0;
+    
+            while (!vowels.includes(word[i]) && i < word.length) {
+              consonantCluster += word[i];
+              i++;
+            }
+    
+            pigLatin = word.slice(i) + consonantCluster + 'ay';
+          }
+    
+          return pigLatin;
+        }
+      </script>
+      </div>
+    </section>
+
+    <section class="project">
+      <h2>Project 2</h2>
+      <p>This project creates a list of items based on user input. It uses event handlers and listeners to effectively populate the list while also employing the .trim() method to keep the list uniform and neat.</p>
+      <div class="list-container">
+        <h4>Shopping List</h4>
+        <form id="shopping-form">
+          <input type="text" id="item-input" placeholder="Enter an item">
+          <button type="submit">Add Item</button>
+        </form>
+        <ul id="item-list"></ul>
+      </div>
+    
+      <script>
+        const form = document.getElementById('shopping-form');
+        const input = document.getElementById('item-input');
+        const itemList = document.getElementById('item-list');
+    
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+    
+          const item = input.value.trim();
+          if (item !== '') {
+            addItem(item);
+            input.value = '';
+          }
+        });
+    
+        function addItem(item) {
+          const listItem = document.createElement('li');
+          listItem.innerHTML = `
+            <span>${item}</span>
+            <button class="delete-btn">Delete</button>
+          `;
+    
+          const deleteBtn = listItem.querySelector('.delete-btn');
+          deleteBtn.addEventListener('click', function () {
+            listItem.remove();
+          });
+    
+          itemList.appendChild(listItem);
+        }
+      </script>
+      </div>
+    </section>
+
+    <section class="project">
+      <h2>Project 3</h2>
+      <p>This project uses the Random Famous Quotes API to generate a random famous quote when the user presses the button. Should an error occur, an error message will display in the quote's place.</p>
+        <div class="quote-container">
+            <h4>Random Quotes Generator</h4>
+                <div id="quote-container">
+                    <p id="quote-text"></p>
+                    <p id="quote-author"></p>
+                </div>
+            <button id="new-quote-btn">New Quote</button>
+            <script src="app2.js"></script>
+        </div>
+    </section>
+    </section>
+    <section id="contact">
+        <h2>Contact Information</h2>
+        <p><strong>Address:</strong> 7034 Broomshedge Trl, Winter Garden, FL 34787</p>
+        <p><strong>Telephone:</strong> (720) 334-0221</p>
+        <p><strong>Email:</strong> ryanjbougan@gmail.com</p>
+      </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Ryan Bougan. All rights reserved.</p>
+  </footer>
+</body>
+
+</html>
